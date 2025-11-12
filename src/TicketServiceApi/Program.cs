@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TicketServiceApi.DAL;
 
@@ -34,6 +35,11 @@ var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
+
+app.MapGet("/manage/health", () => StatusCodes.Status200OK);
+var apiV1 = app.MapGroup("/api/v1");
+
+apiV1.MapGet("/tickets", ([FromHeader(Name = "X-User-Name")] string apiKey) => "all user bilets");
 
 app.MapGet("/weatherforecast", () =>
     {
