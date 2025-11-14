@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using GatewayService.BLL;
 using GatewayService.DTO;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
@@ -49,31 +50,38 @@ app.MapGet("/manage/health", () => StatusCodes.Status200OK);
 
 var apiV1 = app.MapGroup("/api/v1");
 
+//!!!
 apiV1.MapGet("/flights", ([FromQuery] int page, [FromQuery] int size) => 
     "")
     .WithDescription("Получить список рейсов")
     .WithOpenApi();
 
+//!!!
 apiV1.MapGet("/privilege", ([FromHeader(Name = "X-User-Name")]string username) => "")
     .WithDescription("Получить информацию о состоянии бонусного счета")
     .WithOpenApi();
 
-apiV1.MapPost("/tickets", ([FromHeader(Name = "X-User-Name")]string username, string DTO) => "")
+apiV1.MapPost("/tickets", async ([FromHeader(Name = "X-User-Name")]string username, BuyTicket ticket, BookingService service) => 
+    await service.BuyTicket(username, ticket))
     .WithDescription("Покупка билета")
     .WithOpenApi();
 
+//!!!
 apiV1.MapGet("/tickets/{ticketUid}", ([FromHeader(Name = "X-User-Name")]string username) => "")
     .WithDescription("Информация по конкретному билету")
     .WithOpenApi();
 
+//!!!
 apiV1.MapGet("/tickets", ([FromHeader(Name = "X-User-Name")]string username) => "")
     .WithDescription("Информация по всем билетам пользователя")
     .WithOpenApi();
 
+//!!!
 apiV1.MapGet("/me", ([FromHeader(Name = "X-User-Name")]string username) => "")
     .WithDescription("Информация о пользователе")
     .WithOpenApi();
 
+//!!!
 apiV1.MapGet("/privilege", ([FromHeader(Name = "X-User-Name")]string username) => "")
     .WithDescription("Получить информацию о состоянии бонусного счета после покупки билета")
     .WithOpenApi();
@@ -83,8 +91,3 @@ apiV1.MapDelete("/tickets/{ticketUid}", ([FromHeader(Name = "X-User-Name")]strin
     .WithOpenApi();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

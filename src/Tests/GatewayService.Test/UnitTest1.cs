@@ -1,4 +1,4 @@
-namespace FlightService.Test;
+namespace GatewayService.Test;
 
 public class UnitTest1
 {
