@@ -11,7 +11,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__Default=Host=bonus-db;Port=5432;Database=BonusDb;Username=postgres;Password=postgres
     depends_on:
-      - bonus-db
+      bonus-db:
+        condition: service_healthy
 
   bonus-db:
     image: postgres:15-alpine
@@ -24,6 +25,11 @@ services:
       - "5432:5432"
     volumes:
       - bonus-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -p 5432" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
   
   #######        
   ticket-service:
@@ -37,7 +43,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__Default=Host=ticket-db;Port=5433;Database=TicketDb;Username=postgres;Password=postgres
     depends_on:
-      - ticket-db
+      ticket-db:
+        condition: service_healthy
 
   ticket-db:
     image: postgres:15-alpine
@@ -53,6 +60,11 @@ services:
     volumes:
       - ticket-postgres-data:/var/lib/postgresql/data
     command: -p 5433
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -p 5433" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
   
   #######        
   flight-service:
@@ -66,7 +78,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__Default=Host=flight-db;Port=5434;Database=FlightDb;Username=postgres;Password=postgres
     depends_on:
-      - flight-db
+      flight-db:
+        condition: service_healthy
 
   flight-db:
     image: postgres:15-alpine
@@ -82,6 +95,12 @@ services:
     volumes:
       - flight-postgres-data:/var/lib/postgresql/data
     command: -p 5434
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -p 5434" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   #######        
   gateway-service:
     build:
