@@ -19,4 +19,7 @@ RUN dotnet publish "./FlightServiceApi.csproj" -c $BUILD_CONFIGURATION -o /app/p
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+ENV ASPNETCORE_URLS=http://+:$PORT
+
 ENTRYPOINT ["dotnet", "FlightServiceApi.dll"]
