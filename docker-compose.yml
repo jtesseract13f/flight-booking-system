@@ -13,6 +13,8 @@ services:
       - ConnectionStrings__Default=Host=bonus-db;Port=5432;Database=BonusDb;Username=postgres;Password=postgres
     networks:
       - microservices-network
+    depends_on:
+      - bonus-db
 
   bonus-db:
     image: postgres:15-alpine
@@ -42,6 +44,8 @@ services:
       - ConnectionStrings__Default=Host=ticket-db;Port=5433;Database=TicketDb;Username=postgres;Password=postgres
     networks:
       - microservices-network
+    depends_on:
+      - ticket-db
 
   ticket-db:
     image: postgres:15-alpine
@@ -74,6 +78,8 @@ services:
       - ConnectionStrings__Default=Host=flight-db;Port=5434;Database=FlightDb;Username=postgres;Password=postgres
     networks:
       - microservices-network
+    depends_on:
+      - flight-db
 
   flight-db:
     image: postgres:15-alpine
@@ -104,6 +110,10 @@ services:
       - ASPNETCORE_URLS=http://+:8080
     networks:
       - microservices-network
+    depends_on:
+      - flight-service
+      - ticket-service
+      - bonus-service
 
 networks:
   microservices-network:
