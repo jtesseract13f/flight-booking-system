@@ -35,8 +35,8 @@ jobs:
         uses: matt-ball/newman-action@master
         with:
           # TODO insert your variant
-          collection: <variant>/postman/collection.json
-          environment: <variant>/postman/environment.json
+          collection: 1/postman/collection.json
+          environment: 1/postman/environment.json
           delayRequest: 100
           reporters: '[ "cli" ]'
 
@@ -49,7 +49,7 @@ jobs:
         with:
           google_token: ${{secrets.GOOGLE_API_KEY}}
           sheet_id: "1xkgjUX6Qmk7rdJG-QPOToav-HWWtthJjnShIKnw3oIY"
-          homework_number: 1
+          homework_number: 2
           user_column: 'D'
           column_offset: 'F'
           mark: "'+"
