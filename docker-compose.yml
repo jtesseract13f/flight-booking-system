@@ -2,8 +2,8 @@ version: "3"
 services:
   bonus-service:
     build:
-      context: ./src/BonusServiceApi
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./src/BonusServiceApi/Dockerfile
     container_name: bonus-service
     ports:
       - "8050:8050"
@@ -33,8 +33,8 @@ services:
   #######        
   ticket-service:
     build:
-      context: ./src/TicketServiceApi
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./src/TicketServiceApi/Dockerfile
     container_name: ticket-service
     ports:
       - "8070:8070"
@@ -67,8 +67,8 @@ services:
   #######        
   flight-service:
     build:
-      context: ./src/FlightServiceApi
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./src/FlightServiceApi/Dockerfile
     container_name: flight-service
     ports:
       - "8060:8060"
@@ -100,8 +100,8 @@ services:
   #######        
   gateway-service:
     build:
-      context: ./src/GatewayService
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./src/GatewayService/Dockerfile
     container_name: gateway-service
     ports:
       - "8080:8080"
