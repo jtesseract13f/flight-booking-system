@@ -40,10 +40,6 @@ jobs:
           delayRequest: 100
           reporters: '[ "cli" ]'
 
-      - uses: education/autograding@v1
-        id: autograder
-        continue-on-error: true
-
       - name: Get Gateway logs
         if: always()  
         run: docker compose logs gateway-service
