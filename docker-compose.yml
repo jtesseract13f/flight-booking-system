@@ -5,13 +5,11 @@ services:
       context: .
       dockerfile: ./src/BonusServiceApi/Dockerfile
     container_name: bonus-service
-    expose:
-      - "8050"
     ports:
-      - "8050:8050"
+      - "8050:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8050
+      - ASPNETCORE_URLS=http://+:8080
       - ConnectionStrings__Default=Host=bonus-db;Port=5432;Database=BonusDb;Username=postgres;Password=postgres
     depends_on:
       - bonus-db
@@ -34,13 +32,11 @@ services:
       context: .
       dockerfile: ./src/TicketServiceApi/Dockerfile
     container_name: ticket-service
-    expose:
-      - "8070"
     ports:
-      - "8070:8070"
+      - "8070:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8070
+      - ASPNETCORE_URLS=http://+:8080
       - ConnectionStrings__Default=Host=ticket-db;Port=5433;Database=TicketDb;Username=postgres;Password=postgres
     depends_on:
       - ticket-db
@@ -66,13 +62,11 @@ services:
       context: .
       dockerfile: ./src/FlightServiceApi/Dockerfile
     container_name: flight-service
-    expose:
-      - "8060"
     ports:
-      - "8060:8060"
+      - "8060:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8060
+      - ASPNETCORE_URLS=http://+:8080
       - ConnectionStrings__Default=Host=flight-db;Port=5434;Database=FlightDb;Username=postgres;Password=postgres
     depends_on:
       - flight-db
@@ -97,8 +91,6 @@ services:
       context: .
       dockerfile: ./src/GatewayService/Dockerfile
     container_name: gateway-service
-    expose:
-      - "8080"
     ports:
       - "8080:8080"
     environment:

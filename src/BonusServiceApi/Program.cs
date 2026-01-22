@@ -12,8 +12,9 @@ builder.Services.AddScoped<BonusService>();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8050";
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 app.Urls.Add($"http://*:{port}");
+
 try //Migrator
 {
     using var scope = ((IApplicationBuilder)app).ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope();
@@ -31,8 +32,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.MapGet("/manage/health", () => StatusCodes.Status200OK);
 

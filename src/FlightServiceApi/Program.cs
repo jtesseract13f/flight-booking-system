@@ -11,7 +11,7 @@ builder.Services.AddDbContext<FlightDbContext>(x => x.UseNpgsql(builder.Configur
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8060";
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 app.Urls.Add($"http://*:{port}");
 
 try //Migrator
@@ -33,7 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.MapGet("/manage/health", () => StatusCodes.Status200OK);
 //TO DO: test all
