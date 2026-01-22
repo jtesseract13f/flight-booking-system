@@ -1,3 +1,5 @@
+using GatewayService.DTO.TicketServiceDtos;
+
 namespace GatewayService.DTO;
 
 public record UserInfo(

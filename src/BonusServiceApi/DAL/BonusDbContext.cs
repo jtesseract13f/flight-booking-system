@@ -5,8 +5,8 @@ namespace BonusServiceApi.DAL;
 
 public class BonusDbContext(DbContextOptions<BonusDbContext> options) : DbContext(options)
 {
-    DbSet<Privilege> Privileges { get; set; }
-    DbSet<PrivilegeHistory>  PrivilegeHistories { get; set; }
+    public DbSet<Privilege> Privileges { get; set; }
+    public DbSet<PrivilegeHistory>  PrivilegeHistories { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

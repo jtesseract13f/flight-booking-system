@@ -10,8 +10,8 @@ public class Privilege
     public required string Username { get; set; }
     public PrivilegeStatus Status { get; set; } = PrivilegeStatus.BRONZE;
     public uint Balance { get; set; }
-    
-    public ICollection<PrivilegeHistory> History { get; set; }
+
+    public ICollection<PrivilegeHistory> History { get; set; } = new List<PrivilegeHistory>();
 }
 
 /*

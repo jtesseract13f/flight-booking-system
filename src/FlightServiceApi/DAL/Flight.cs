@@ -11,6 +11,7 @@ public class Flight
     public DateTime Datetime {get; set;}
     public int FromAirportId { get; set; }
     public int ToAirportId { get; set; }
+    public int Price { get; set; }
     
     public Airport FromAirport { get; set; }
     public Airport ToAirport { get; set; }
