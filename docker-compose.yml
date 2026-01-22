@@ -118,9 +118,7 @@ services:
 networks:
   microservices-network:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.20.0.0/16
+
 volumes:
   bonus-postgres-data:
   ticket-postgres-data:
