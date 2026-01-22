@@ -20,7 +20,7 @@ jobs:
         run: dotnet restore src/GatewayService/GatewayService.csproj
 
       - name: Build
-        run: dotnet build src/Tests/GatewayService.Test/GatewayService.Test.csproj --configuration Release --no-restore
+        run: dotnet build src/GatewayService/GatewayService.csproj --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test Tests/Tests.csproj --logger "console;verbosity=normal"
+        run: dotnet test  src/Tests/GatewayService.Test/GatewayService.Test.csproj --logger "console;verbosity=normal"
